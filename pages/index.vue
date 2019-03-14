@@ -40,6 +40,8 @@ export default {
   },
   mounted() {
     this.modifiedCanvas = this.$refs.modifiedCanvasEl;
+    this.modifiedCanvas.width = this.modifiedCanvas.clientWidth;
+    this.modifiedCanvas.height = this.modifiedCanvas.clientHeight;
 
     // create the tensors with the dimensions of the canvas the output will go to
     this.currFrameTensor = new gm.Tensor("uint8", [
@@ -69,6 +71,7 @@ export default {
         this.modifiedCanvas.clientWidth,
         this.modifiedCanvas.clientHeight
       );
+      this.frameIndex = 0;
       this.operation = gm.sub(this.currFrameTensor, this.prevFrameTensor);
 
       // start video from CaptureVideo() and run RAF loop
@@ -90,12 +93,11 @@ export default {
       this.stream.getImageBuffer(this.currFrameTensor);
       this.session.runOp(
         this.operation,
-        this.currFrameTensor,
+        this.frameIndex += 1,
         this.outputTensor
       );
 
-      gm.tensorClone(this.currFrameTensor, this.prevFrameTensor);
-      gm.canvasFromTensor(this.modifiedCanvas, this.currFrameTensor);
+      gm.canvasFromTensor(this.modifiedCanvas, this.outputTensor);
 
       // RAF loop
       requestAnimationFrame(this.updateVideoCanvas);
