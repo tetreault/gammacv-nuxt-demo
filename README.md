@@ -1,6 +1,3 @@
-# andpizza-pizza-joint
-
-> My awe-inspiring Nuxt.js project
 
 ## Build Setup
 
