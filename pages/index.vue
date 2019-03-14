@@ -1,33 +1,17 @@
 <template>
-  <section 
-    ref="section" 
-    class="section">
+  <section ref="section" class="section">
     <div class="hero is-fullheight">
       <div class="hero-body">
         <!-- <img 
           ref="imgTest" 
         src="~/assets/test.png">-->
-        <canvas 
-          ref="normalCanvasEl" 
-          width="400" 
-          height="300"/>
-        <canvas 
-          ref="modifiedCanvasEl" 
-          width="400" 
-          height="300"/>
-        <video 
-          id="video" 
-          ref="userMediaVideo" 
-          autoplay 
-          playsinline 
-          muted/>
+        <canvas ref="normalCanvasEl" width="400" height="300"/>
+        <canvas ref="modifiedCanvasEl" width="400" height="300"/>
+        <video id="video" ref="userMediaVideo" autoplay playsinline muted/>
       </div>
       <div class="has-text-centered hero-foot">
         <br>
-        <a 
-          href="#" 
-          class="button start-btn" 
-          @click.prevent="startCam">Start Scan</a>
+        <a href="#" class="button start-btn" @click.prevent="startCam">Start Scan</a>
       </div>
     </div>
   </section>
@@ -37,8 +21,6 @@
 // NOTE:
 // 1) need to load gammacv plugin this way (see file: ~/plugins/gammacv),
 //    otherwise it has wrong context and throws "Document is not defined" error
-//
-// 2) I have modified the file node_modules/gammacv/dis/index.es.js for this project
 let gm;
 if (process.browser) {
   gm = require("gammacv");
@@ -114,7 +96,8 @@ export default {
 
       gm.tensorClone(this.currFrameTensor, this.prevFrameTensor);
       gm.canvasFromTensor(this.modifiedCanvas, this.currFrameTensor);
-      // // RAF loop
+
+      // RAF loop
       requestAnimationFrame(this.updateVideoCanvas);
     }
   }
