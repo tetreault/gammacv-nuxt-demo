@@ -1,17 +1,33 @@
 <template>
-  <section ref="section" class="section">
+  <section 
+    ref="section" 
+    class="section">
     <div class="hero is-fullheight">
       <div class="hero-body">
         <!-- <img 
           ref="imgTest" 
         src="~/assets/test.png">-->
-        <canvas ref="normalCanvasEl" width="400" height="300"/>
-        <canvas ref="modifiedCanvasEl" width="400" height="300"/>
-        <video id="video" ref="userMediaVideo" autoplay playsinline muted/>
+        <canvas 
+          ref="normalCanvasEl" 
+          width="400" 
+          height="300"/>
+        <canvas 
+          ref="modifiedCanvasEl" 
+          width="400" 
+          height="300"/>
+        <video 
+          id="video" 
+          ref="userMediaVideo" 
+          autoplay 
+          playsinline 
+          muted/>
       </div>
       <div class="has-text-centered hero-foot">
         <br>
-        <a href="#" class="button start-btn" @click.prevent="startCam">Start Scan</a>
+        <a 
+          href="#" 
+          class="button start-btn" 
+          @click.prevent="startCam">Start Scan</a>
       </div>
     </div>
   </section>
